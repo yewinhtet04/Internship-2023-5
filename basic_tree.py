@@ -16,14 +16,18 @@ def insert(data: list, tree: Node):
         # if tree==None :tree=Node()
         tree.title = data[mix]
         # print(data,mix,data[:mix],data[mix+1:])
-        if len(data[:mix]) > 0: tree.left = Node();insert(data[:mix], tree.left)
-        if len(data[mix + 1:]) > 0: tree.right = Node();insert(data[mix + 1:], tree.right)
+        if len(data[:mix]) > 0:
+            tree.left = Node()
+            insert(data[:mix], tree.left)
+        if len(data[mix + 1:]) > 0:
+            tree.right = Node()
+            insert(data[mix + 1:], tree.right)
 
 
 def print_data(node):
     if node is not None:
         print_data(node.left)
-        print(node.data)
+        print(node.title)
         print_data(node.right)
 
 def tree_alphabet():
@@ -50,4 +54,4 @@ def create_tree_node():
 
     # print_data(nood)
 trr=create_tree()
-print(chr(46),chr(64),chr(95),chr(97))
+print_data(trr)
