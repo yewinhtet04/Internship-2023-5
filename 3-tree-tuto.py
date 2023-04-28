@@ -35,18 +35,18 @@ def printting(tree:Node):
         printting(tree.right)
 def create_tree():
     t_data=tree_data()
-    print(t_data)
+    #print(t_data)
     tree=Node()
     insert_tree_data(tree,t_data)
-    print(t_data)
+    #print(t_data)
     return tree
 
 def create_sec_tree():
     t_data=sec_tree_data()
-    print(t_data)
+    #print(t_data)
     tree=Node()
     insert_tree_data(tree,t_data)
-    print(t_data)
+    #print(t_data)
     return tree
 
 
@@ -68,11 +68,31 @@ def insert_sec_data(node:Node,name:str):
     else:
         insert_sec_data(node.left,name)
 
+def search_data(node:Node,name:str):
+    if node.data==name[0]:
+        if not node.link: return None
+        return search_sec_data(node.link,name)
+    elif node.data<name[0]:
+        return search_data(node.right,name)
+    else:
+        return search_data(node.left,name)
+
+def search_sec_data(node:Node,name:str):
+    if node.data==len(name):
+        if not node.store: return None
+        print(node.store)
+        return node.store[node.store.index(name)]
+    elif node.data<len(name):
+        return search_sec_data(node.right,name)
+    else:
+        return search_sec_data(node.left,name)
+
 tree=create_tree()
-name=input('Enter name:')
-insert_data(tree,name)
-name=input('Enter name:')
-insert_data(tree,name)
-printting(tree)
 
-
+name=input('Enter name:')
+while name:
+    insert_data(tree,name)
+    name=input('Enter name:')
+    #printting(tree)
+name=input('Search name:')
+print(search_data(tree,name))
