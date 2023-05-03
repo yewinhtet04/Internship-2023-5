@@ -1,5 +1,6 @@
 import basic_tree
-
+import json
+import random
 tree = None
 count = 0
 
@@ -109,6 +110,33 @@ def print_all(tree):
     if tree.right:  print_all(tree.right)
     if tree.link:   print_all(tree.link)
 
+all_data={}
+def get_all(tree):
+    global all_data
+    global count
+    count += 1
+    # print(tree.title)
+    if tree.data is not None:  all_data.update({len(all_data):  tree.data})
+    if tree.left:   get_all(tree.left)
+    if tree.link:   get_all(tree.link)
+    if tree.right:  get_all(tree.right)
+
+def random_email():
+    length=random.randrange(4,21)
+    em=''
+    for _ in range(length):
+        em+=chr(random.randrange(97,123))
+    return em+'@gmail.com'
+
+
+f = open('user_data.json')
+# returns JSON object as
+# a dictionary
+a_data = json.load(f)
+if not tree:   tree = basic_tree.create_tree_node()
+for a in a_data.values():
+    insert_data(tree,a)
+
 
 while True:
     choose = input('Enter 1 for retrieve user\nEnter 0 for print all user\nEnter any key for create user\n>>>')
@@ -125,6 +153,17 @@ while True:
         ans = get_data(tree, mail)
         print(ans if ans else 'NO EMAIL FOUND!')
         print(count)
+    elif choose=='2':
+        if not tree:   tree = basic_tree.create_tree_node()
+        for _ in range(1000):
+            insert_data(tree,{'mail': random_email(), 'name': 'name', 'password': 'password', 'address': 'address', 'phone': '094575211'})
+        count=0
+        all_data={}
+        get_all(tree)
+        print(count)
+        f = open("user_data.json", "w")
+        f.write(json.dumps(all_data))
+        f.close()
     else:
         if not tree:   tree = basic_tree.create_tree_node()
         mail = loop('Enter email:', 2, tree)  # mail

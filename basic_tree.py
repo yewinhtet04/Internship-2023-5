@@ -54,4 +54,4 @@ def create_tree_node():
 
     # print_data(nood)
 trr=create_tree()
-print_data(trr)
+#print_data(trr)
