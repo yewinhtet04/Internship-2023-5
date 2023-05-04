@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+  <body>
+  <div class="container-fluid bg-dark py-5 h-100">
+    <div class="container-sm bg-danger-subtle mx-auto m-5 p-2" style="width: 600px;">
+      <div class="container-sm bg-secondary" style="width: 550px;height: 150px" id="screen">12</div>
+      <div class="container text-center">
+        <div class="row row-cols-4" id="tabel">
+          <div class="col">1</div>
+        </div>
+</div>
+    </div>
+  </div>
+    <script src="bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="bootstrap/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <script>
+      let text="";
+      let div="<div class=\"col bg-danger-subtle py-3\"><button type=\"button\" class=\"btn btn-primary w-100 h-100\" onclick='create_screen(number)'>";
+      let div2="</button></div>"
+      for (let i = 0; i < 10; i++) {
+        text+=div.replace("number",i)+i+div2
+      }
+        text+=div.replace('create_screen(number)','clear_scrn()').replace('btn-primary','btn-danger')+'Clear'+div2
+        text+=div.replace('create_screen(number)','compute()').replace('btn-primary','btn-success')+"="+div2
+      opp=['+','-','*','/']
+      for (let i = 0; i < 4; i++) {
+        text+=div.replace('btn-primary','btn-dark').replace('create_screen(number)','operator('+i+')')+opp[i]+div2
+      }
+      document.getElementById('tabel').innerHTML=text
+      console.log(text)
+      function create_screen(x){
+        scrn=document.getElementById('screen')
+        y=scrn.textContent
+
+        scrn.innerHTML=y+x
+      }
+      function clear_scrn(){
+        scrn=document.getElementById('screen')
+        scrn.innerHTML=''
+      }
+      function compute(){
+        scrn=document.getElementById('screen')
+        y=scrn.textContent
+        scrn.innerHTML='compute'
+      }
+      function operator(x){
+        scrn=document.getElementById('screen')
+        y=scrn.textContent
+        op=['+','-','*','/']
+        scrn.innerHTML=y+op[x]
+      }
+    </script>
+  </body>
+</html>
