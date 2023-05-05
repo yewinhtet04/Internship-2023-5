@@ -30,5 +30,24 @@
   </div>
   <button type="submit" class="btn btn-primary">Generate</button>
 </form>
+    <div class="card mb-3 mx-auto p-3" style="width: 50rem;background: gainsboro">
+  <div class="card-body">
+    <h5 class="card-title">Hello! Sir,</h5>
+    <p class="card-text ">
+        I would like to introduce myself.<br>
+        My name is {{ name }}.<br>
+        I am from {{ town }} and my age is {{ age }}.<br>
+        Have you heard of {{ town }} before? <br>
+        I wish you are. <br>
+        You can call me {{ nickname }}. It's sound friendly.
+    </p>
+    <button class="btn btn-primary" onclick="alert()">Like it</button>
+  </div>
+</div>
+<script>
+    function alert(){
+        window.alert('Thank You');
+    }
+</script>
 </body>
 </html>
