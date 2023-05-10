@@ -10,44 +10,41 @@
 <div class="container mx-lg-5 px-5 my-lg-5">
   <div class="row">
     <div class="col-sm">
-<h1 class="text-black ">User Login</h1>
+<h1 class="text-black ">User Registration</h1>
     </div>
-    <div class="col-sm ">
-        <div class="container">
-  <div class="row">
-    <div class="col-sm">
-    </div>
-    <div class="col-sm my-2" style="padding-left: 100px;">
-        <h5 class="" style="color: #1f1f1f">Not a member?</h5>
-    </div>
-    <div class="col-sm">
-        <a href="register"><button class="btn btn-primary" style="">Sign Up</button></a>
+    <div class="col-sm clearfix">
+        <a href="/user"><button class="btn btn-primary" style="margin-left: 400px;">Back To Log In</button></a>
     </div>
   </div>
 </div>
-    </div>
-  </div>
+{% if success %}
+  <div class="alert alert-success mx-5 px-4" style="font-size: 20px" role="alert">
+    You have been registered successfully with {{ success.email }}! Back to Login.
 </div>
-{% if status %}
+{% endif %}
+{% if fail %}
   <div class="alert alert-danger mx-5 px-4" style="font-size: 20px" role="alert">
-    {{ status }}!
+    {{ fail }}
 </div>
 {% endif %}
 <div class="container">
     <form method="post" action="">
          {% csrf_token %}
   <div class="form-group my-lg-3">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required="required" value="{{ email }}">
+    <label for="exampleInputEmail1">Enter Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required="required" value="{{ data.email }}">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div class="form-group my-lg-3">
-    <label for="exampleInputPassword1">Password</label>
+    <label for="exampleInputPassword1">Enter Password</label>
     <input type="password" name="pwd" class="form-control" id="exampleInputPassword1" placeholder="Password" required="required">
+  </div>
+  <div class="form-group my-lg-3">
+    <label for="exampleInputPassword1">Confirm Your Password</label>
+    <input type="password" name="r_pwd" class="form-control" id="exampleInputPassword1" placeholder="Renter Password" required="required">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
-
 </body>
 </html>
