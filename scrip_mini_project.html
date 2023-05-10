@@ -6,10 +6,10 @@
     <title>Bootstrap demo</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   </head>
-  <body>
+  <body class="m-4 bg-dark" style="height: 10em">
   <div class="container-fluid bg-dark py-5 h-100">
     <div class="container-sm bg-danger-subtle mx-auto m-5 p-2" style="width: 600px;">
-      <div class="container-sm bg-secondary" style="width: 550px;height: 150px" id="screen">12</div>
+      <div class="container-sm bg-secondary display-3" style="width: 550px;height: 150px" id="screen"><strong></strong></div>
       <div class="container text-center">
         <div class="row row-cols-4" id="tabel">
           <div class="col">1</div>
@@ -34,11 +34,32 @@
         text+=div.replace('btn-primary','btn-dark').replace('create_screen(number)','operator('+i+')')+opp[i]+div2
       }
       document.getElementById('tabel').innerHTML=text
-      console.log(text)
+      //console.log(text)
+
+      function oop(s){
+        let op='',opnd='';
+        while (s!==''){
+          if (isNaN(s[0])){
+            opnd=s[0]
+          }else{
+            op+=s[0]
+          }
+          s=s.substring(1)
+          //console.log('s',s,'op',op,'opnd',opnd)
+        }
+        return [op,opnd]
+      }
       function create_screen(x){
         scrn=document.getElementById('screen')
         y=scrn.textContent
-
+        /*
+        let [op,opnd]=oop(y)
+        console.log('opernd',op,'operator',opnd)
+        if(opnd===''){
+          scrn.innerHTML=y+x
+        }else{
+          scrn.innerHTML='099889'
+        }*/
         scrn.innerHTML=y+x
       }
       function clear_scrn(){
@@ -48,13 +69,16 @@
       function compute(){
         scrn=document.getElementById('screen')
         y=scrn.textContent
-        scrn.innerHTML='compute'
+        scrn.innerHTML=eval(y)
       }
       function operator(x){
         scrn=document.getElementById('screen')
         y=scrn.textContent
-        op=['+','-','*','/']
-        scrn.innerHTML=y+op[x]
+        let [op,opnd]=oop(y)
+        if(op!=''){
+        operat=['+','-','*','/']
+        scrn.innerHTML=y+operat[x]
+        }
       }
     </script>
   </body>
