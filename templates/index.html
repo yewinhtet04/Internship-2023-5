@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary bg-dark px-5" >
+  <div class=" row container-fluid py-0 mx-5">
+      <div class="col-auto m-2 text-white" style="font-size: 2em">MOVIES</div>
+      <div class="col-md-auto"><button type="button" class="btn btn-light">Log In</button></div>
+  </div>
+</nav>
+<div class="container-fluid px-5" style="margin-top:5em;background: gray">
+        <button id="" onclick="dis(0)"> hi</button>
+        <button id="" onclick="dis(1)">se</button>
+    <div class="row mx-5" id="movies">
+        {% for i in movie %}
+        <div class="col-3 bg-success mx-5 p-0 my-3">
+            <div class="card" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="https://i.pinimg.com/originals/08/35/f1/0835f10458c4d8f68da2aafd1084c104.jpg" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Name YE WI</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mx-5" id="series" style="display: none">
+        {% for i in movie %}
+        <div class="col-3 bg-success mx-5 p-0 my-3">
+            <div class="card" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="https://i.pinimg.com/originals/08/35/f1/0835f10458c4d8f68da2aafd1084c104.jpg" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Series</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+<script>
+    function dis(i){
+            a=document.getElementById('movies')
+            b=document.getElementById('series')
+        if(i==1){
+            a.style.display='none'
+            b.style.display='block'
+        }
+        else{
+            b.style.display='none'
+            a.style.display='block'
+        }
+    }
+</script>
+</html>
