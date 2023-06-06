@@ -1,0 +1,48 @@
+{% extends 'layout/base.html' %}
+{% block user_log %}
+    <p class="d-inline fw-bold mt-2">Not a member?</p>
+    <a href={{ url_for('signup') }}><button class="btn btn-dark ms-3">Sign Up</button></a>
+{% endblock %}
+{% block body %}
+    <div class="my-1 py-2" style="min-height: 60px">
+        {% if data %}
+            <div class="alert {% if data.status=='fail' %}bg-danger{% else %}bg-success{% endif %} d-flex bg-opacity-50" role="alert">
+                {{ data.message }}
+            </div>
+        {% endif %}
+    </div>
+    <!--Form-->
+    <div class="row justify-content-center ">
+        <div class=" col-8 text-center bg-light p-5 bg-opacity-10 rounded-pill">
+            <div class="mx-5">
+                <h1 class="mb-4">Log In</h1>
+                <form method="post" action="/login">
+                    <div class="row mb-4">
+                    <label for="username" class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control bg-transparent" id="username" name="username" value="{% if data %}{{ data.user.username }}{% endif %}">
+                        {% if data and data.username_err %}
+                            <label class="float-start text-danger fs-6 fw-semibold fw-italic">{{ data.username_err }}</label>
+                        {% endif %}
+                    </div>
+                    </div>
+                    <div class="row mb-4">
+                        <label for="password" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control bg-transparent" id="password" name="password"  value="{% if data %}{{ data.user.password }}{% endif %}">
+                            {% if data and data.password_err %}
+                                <label class="float-start text-danger fs-6 fw-semibold fw-italic">{{ data.password_err }}</label>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Form-->
+{% endblock %}
+
+<!--
+
+-->
