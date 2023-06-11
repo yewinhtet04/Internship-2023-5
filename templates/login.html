@@ -1,8 +1,8 @@
 {% extends 'layout/base.html' %}
-{% block user_log %}
-    <p class="d-inline fw-bold mt-2">Not a member?</p>
-    <a href={{ url_for('signup') }}><button class="btn btn-dark ms-3">Sign Up</button></a>
+{% block login %}
+    <p class="d-inline fw-bold">Not a member?</p>
 {% endblock %}
+
 {% block body %}
     <div class="my-1 py-2" style="min-height: 60px">
         {% if data %}
@@ -20,7 +20,7 @@
                     <div class="row mb-4">
                     <label for="username" class="col-sm-3 col-form-label">Username</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control bg-transparent" id="username" name="username" value="{% if data %}{{ data.user.username }}{% endif %}">
+                        <input type="text" class="form-control bg-transparent" id="username" name="username" value="{% if data %}{{ data.user.username }}{% endif %}" required>
                         {% if data and data.username_err %}
                             <label class="float-start text-danger fs-6 fw-semibold fw-italic">{{ data.username_err }}</label>
                         {% endif %}
@@ -29,7 +29,7 @@
                     <div class="row mb-4">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control bg-transparent" id="password" name="password"  value="{% if data %}{{ data.user.password }}{% endif %}">
+                            <input type="password" class="form-control bg-transparent" id="password" name="password"  value="{% if data %}{{ data.user.password }}{% endif %}" required>
                             {% if data and data.password_err %}
                                 <label class="float-start text-danger fs-6 fw-semibold fw-italic">{{ data.password_err }}</label>
                             {% endif %}

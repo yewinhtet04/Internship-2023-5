@@ -1,21 +1,67 @@
 {% extends 'layout/base.html' %}
 {% block body %}
     <!-- Head-->
-    <div class=" text-center mt-5 pt-5">
-        <h1 class="display-1 my-4">Choose A Ticket !</h1>
-        <div class="row justify-content-center">
-            <div class="col-7">
-                <div class="form-group">
+    <div class=" py-5">
+        {% if data and data.user_session %}
+            <h1 class="display-1 mb-4 text-center">Choose A Ticket !</h1>
 
-                <select class="bg-dark text-light w-100 rounded p-2">
-                    <option selected>Select from below.</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                </div>
+            <div class="row justify-content-center">
+                {% for i,j in data.tickes.items() %}
+
+                        {% if not(j) %}
+                        <p class="btn bg-dark text-light fw-bold col-1 mb-3 mx-2" style="opacity:0.8"  id="{{ i }}">{{ i }}</p>
+                        {% elif j==2 %}
+                        <p class="btn bg-success text-light fw-bold col-1 mb-3 mx-2" style="opacity:0.8"  id="{{ i }}">{{ i }}</p>
+                        {% else %}
+                        <button class="btn bg-light fw-bold col-1 mb-3 mx-2" style="opacity:0.9"  onclick="add('{{ i }}')" id="{{ i }}">{{ i }}</button>
+                        {% endif %}
+
+                {% endfor %}
             </div>
-        </div>
+            <form method="post" action="/order">
+                <div class="row justify-content-center">
+                    <button type="submit" class="btn col-11 bg-light py-2"><p class="h2 text-success">Submit Ticket</p></button>
+
+                </div>
+                <input type="hidden" value="" name="tickets" id="ticket">
+            </form>
+            <script>
+            function add(num){
+                p=document.getElementById('ticket');
+                value=p.value;
+                d=value.split(",");
+                del=false
+                for (let i = 0; i < d.length; i++) {
+                    if(d[i]==num){
+                        del=true
+                        delete d[i];break;
+                    }
+                }
+                str=''
+                for (let i = 0; i < d.length; i++){
+                    if (str!='' && d[i]!=undefined){str+=','}
+                    if(d[i]!=undefined){str+=d[i]}
+
+                }
+                spread=',';
+                if(str==''){
+                    spread='';
+                }
+                dd=document.getElementById(num);
+                if(del){num='';spread='';
+                    dd.classList.remove('bg-info');
+                    dd.classList.add('bg-light');
+                }else{
+                    dd.classList.remove('bg-light');
+                    dd.classList.add('bg-info');
+                }
+                p.value=str+spread+num
+            }
+            </script>
+        {% else %}
+            <h1 class="display-1 my-4 text-center">Log In To Choose A Ticket !</h1>
+        {% endif %}
+
     </div>
     <!-- Head-->
 {% endblock %}

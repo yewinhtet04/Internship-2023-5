@@ -7,6 +7,27 @@
 
 <h1></h1>
 <p>This is a paragraph.</p>
+<form id="form">
+  <input type="text" name="text1" value="foo" />
+  <input type="text" name="text2" value="bar" />
+  <input type="text" name="text2" value="baz" />
+  <input type="checkbox" name="check" checked disabled />
+  <button name="intent" value="save">Save</button>
+  <button name="intent" value="saveAsCopy">Save As Copy</button>
+</form>
 
+<output id="output"></output>
+<script>
+    const form = document.getElementById("form");
+const submitter = document.querySelector("button[value=save]");
+const formData = new FormData(form, submitter);
+
+const output = document.getElementById("output");
+
+for (const [key, value] of formData) {
+  output.textContent += `${key}: ${value}\n`;
+}
+
+</script>
 </body>
 </html>

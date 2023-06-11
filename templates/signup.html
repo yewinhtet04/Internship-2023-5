@@ -1,7 +1,8 @@
 {% extends 'layout/base.html' %}
-{% block user_log %}
-    <a href={{ url_for('login') }} ><button class="btn btn-dark">Log In</button></a>
+
+{% block signup %}
 {% endblock %}
+
 {% block body %}
     <div class="my-1 py-2" style="min-height: 60px">
         {% if data %}
@@ -21,7 +22,7 @@
                     <div class="row mb-4">
                         <label for="username" class="col-sm-3 col-form-label">Username</label>
                         <div class="col-sm-9 align-self-start">
-                            <input type="text" class="form-control bg-transparent" id="username" name="username" value="{% if data %}{{ data.user.username }}{% endif %}">
+                            <input type="text" class="form-control bg-transparent" id="username" name="username" value="{% if data %}{{ data.user.username }}{% endif %}" required>
                             {% if data and data.username_err %}
                                 <label class="float-start text-danger fs-6 fw-semibold fw-italic">{{ data.username_err }}</label>
                             {% endif %}
@@ -30,13 +31,13 @@
                     <div class="row mb-4">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
                         <div class="col-sm-9">
-                          <input type="password" class="form-control bg-transparent" id="password" name="password" value="{% if data %}{{ data.user.password }}{% endif %}">
+                          <input type="password" class="form-control bg-transparent" id="password" name="password" value="{% if data %}{{ data.user.password }}{% endif %}" required>
                         </div>
                     </div>
                     <div class="row mb-4">
                         <label for="confirm-password" class="col-sm-3 col-form-label ">Confirm Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control bg-transparent" id="confirm-password" name="confirm-password" value="{% if data %}{{ data.user.confirm_password }}{% endif %}">
+                            <input type="password" class="form-control bg-transparent" id="confirm-password" name="confirm-password" value="{% if data %}{{ data.user.confirm_password }}{% endif %}" required>
                             {% if data and data.password_err %}
                                 <label class="float-start text-danger fs-6 fw-semibold fw-italic">{{ data.password_err }}</label>
                             {% endif %}

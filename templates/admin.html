@@ -1,0 +1,138 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+    <div class="display-2 text-center mt-2 mb-5">Admin Dashboard</div>
+    <div class="h2 text-center my-3">Pending Orders</div>
+    <table class="table table-striped table-dark" style="opacity: 0.9">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Username</th>
+          <th scope="col">Time</th>
+          <th scope="col">Tickets</th>
+          <th scope="col">Prices</th>
+          <th scope="col">Payment</th>
+          <th scope="col">Admin Verify</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for ord in data.pending_order %}
+          <tr class="bg-light">
+              <th scope="row">{{ ord.num }}</th>
+              <td>{{  ord.username }} </td>
+              <td>12/1/2023 8:12:30</td>
+              <td>
+                  <div class="row" >
+                    {% for tik in ord.tickets.split(',') %}
+                      <button class=" btn {% if ord.verify %}bg-success text-light{% else %}bg-light text-dark{% endif %} d-inline fw-bold me-2 px-4" style="width: 90px;">{{ tik }}</button>
+                    {% endfor %}
+                  </div>
+              </td>
+              <td>{{ ord.price }} Ks</td>
+              <td>
+                    <p>Acc Name :  <strong class="text-info">{{ ord.payment.Name }}</strong></p>
+                    <p>Phone No : <strong class="text-info">{{ ord.payment.Phone }}</strong></p>
+                    <p>Transaction Id : <strong class="text-info">{{ ord.payment['Transaction Id'] }}</strong></p>
+                    <p>Amount : <strong class="text-info">{{ ord.payment.Amount }}</strong></p>
+                    <p>Date & Time : <strong class="text-info">{{ ord.payment.Date }}</strong></p>
+                    <p>Transfer Type : <strong class="text-info">{{ ord.payment.Type }}</strong></p>
+              </td>
+              <td>
+                  <form class="d-inline" method="post" action="/admin_accept">
+                      <input type="hidden" name="order_id" value="{{ ord.order_id }}">
+                      <button type="submit" class="btn btn-success">Accept</button>
+                  </form>
+                  <form  class="d-inline"  method="post" action="/admin_reject">
+                      <input type="hidden" name="order_id" value="{{ ord.order_id }}">
+                      <button type="submit" class="btn btn-danger">Reject</button>
+                  </form>
+              </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <div class="h2 text-center my-3">Accepted Orders</div>
+    <table class="table table-striped table-dark" style="opacity: 0.9">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Username</th>
+          <th scope="col">Time</th>
+          <th scope="col">Tickets</th>
+          <th scope="col">Prices</th>
+          <th scope="col">Payment</th>
+          <th scope="col">Admin Verify</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for ord in data.accepted_order %}
+          <tr class="bg-light">
+              <th scope="row">{{ ord.num }}</th>
+              <td>{{  ord.username }} </td>
+              <td>12/1/2023 8:12:30</td>
+              <td>
+                  <div class="row" >
+                    {% for tik in ord.tickets.split(',') %}
+                      <button class=" btn bg-light d-inline fw-bold me-2 px-4" style="width: 90px;">{{ tik }}</button>
+                    {% endfor %}
+                  </div>
+              </td>
+              <td>{{ ord.price }} Ks</td>
+              <td>
+                    <p>Acc Name :  <strong class="text-info">{{ ord.payment.Name }}</strong></p>
+                    <p>Phone No : <strong class="text-info">{{ ord.payment.Phone }}</strong></p>
+                    <p>Transaction Id : <strong class="text-info">{{ ord.payment['Transaction Id'] }}</strong></p>
+                    <p>Amount : <strong class="text-info">{{ ord.payment.Amount }}</strong></p>
+                    <p>Date & Time : <strong class="text-info">{{ ord.payment.Date }}</strong></p>
+                    <p>Transfer Type : <strong class="text-info">{{ ord.payment.Type }}</strong></p>
+              </td>
+              <td>
+                  <p class="text-success fw-bold">Accepted</p>
+              </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <div class="h2 text-center my-3">Rejected Orders</div>
+    <table class="table table-striped table-dark" style="opacity: 0.9">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Username</th>
+          <th scope="col">Time</th>
+          <th scope="col">Tickets</th>
+          <th scope="col">Prices</th>
+          <th scope="col">Payment</th>
+          <th scope="col">Admin Verify</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for ord in data.rejected_order %}
+          <tr class="bg-light">
+              <th scope="row">{{ ord.num }}</th>
+              <td>{{  ord.username }} </td>
+              <td>12/1/2023 8:12:30</td>
+              <td>
+                  <div class="row" >
+                    {% for tik in ord.tickets.split(',') %}
+                      <button class=" btn {% if ord.verify %}bg-success text-light{% else %}bg-light text-dark{% endif %} d-inline fw-bold me-2 px-4" style="width: 90px;">{{ tik }}</button>
+                    {% endfor %}
+                  </div>
+              </td>
+              <td>{{ ord.price }} Ks</td>
+              <td>
+                    <p>Acc Name :  <strong class="text-info">{{ ord.payment.Name }}</strong></p>
+                    <p>Phone No : <strong class="text-info">{{ ord.payment.Phone }}</strong></p>
+                    <p>Transaction Id : <strong class="text-info">{{ ord.payment['Transaction Id'] }}</strong></p>
+                    <p>Amount : <strong class="text-info">{{ ord.payment.Amount }}</strong></p>
+                    <p>Date & Time : <strong class="text-info">{{ ord.payment.Date }}</strong></p>
+                    <p>Transfer Type : <strong class="text-info">{{ ord.payment.Type }}</strong></p>
+              </td>
+              <td>
+                  <p class="text-danger fw-bold">Rejected</p>
+              </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

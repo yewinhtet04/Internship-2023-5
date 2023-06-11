@@ -1,0 +1,33 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+    <div class="display-1 text-center mt-5">Order Details</div>
+    <div class="row justify-content-center bg-light my-3 p-5 bg-opacity-50 h2">
+        <div class="col-4 mx-5 mb-2"> Selected Tickets</div>
+        <div class="col-5 mx-5">
+            {% for tikt in data.tickets.split(',') %}
+                <p class="btn bg-info text-light  fw-bold mb-3 me-2 px-4" style="width: 90px;">{{ tikt }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-4 mx-5 mb-2"> Price Per Ticket</div>
+        <div class="col-5 mx-5"> {{ data.price }} Kyats</div>
+        <div class="col-4 mx-5 mb-2"> Quantity</div>
+        <div class="col-5 mx-5"> {{ data.quantity }}</div>
+        <div class="col-4 mx-5 mb-2"> Total Price</div>
+        <div class="col-5 mx-5">{{ data.total_price }} Kyats</div>
+    </div>
+    <form action="/buyticket" method="post" class="row justify-content-center" enctype="multipart/form-data">
+        <div class="row justify-content-center bg-light my-3 p-5 bg-opacity-50 h2">
+            <div class="col-4 mx-5 mb-2"> Payment</div>
+            <div class="col-5 mx-5">
+                <p class="" style="font-size: 20px;">Transfer money with KBZpay or WaveMoney to 097485961512 and drop your transfer screenshot below.</p>
+                <input type="file" style="font-size: 20px" name="file" required>
+                {% if data and data.ss_err %}<label class="text-danger" style="font-size: 20px;">{{ data.ss_err }}</label>{% endif %}
+            </div>
+        </div>
+        <input type="hidden" value="{{ data.tickets }}" name="tickets">
+        <button type="submit" class="btn col-12 bg-light py-2"><p class="h2 text-success">Buy Ticket</p></button>
+    </form>
+
+{% endblock %}
+
